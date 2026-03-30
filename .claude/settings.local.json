@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"E:/bloging app/frontend/node_modules/.bin/next\" build:*)",
+      "Bash(source:*)"
+    ]
+  }
+}

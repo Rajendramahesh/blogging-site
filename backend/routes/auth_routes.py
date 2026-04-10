@@ -17,8 +17,8 @@ def _set_refresh_cookie(response: Response, token: str) -> None:
         key=REFRESH_COOKIE,
         value=token,
         httponly=True,
-        secure=True,
-        samesite="none",
+        secure=settings.cookie_secure,
+        samesite="none" if settings.cookie_secure else "lax",
         max_age=COOKIE_MAX_AGE,
         path="/",
     )

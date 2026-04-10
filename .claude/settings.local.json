@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(\"E:/bloging app/frontend/node_modules/.bin/next\" build:*)",
-      "Bash(source:*)"
+      "Bash(source:*)",
+      "Bash(uvicorn main:app --reload --port 8000)",
+      "Bash(python:*)"
     ]
   }
 }

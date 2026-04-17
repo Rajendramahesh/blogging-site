@@ -1,9 +1,11 @@
 import logging
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.staticfiles import StaticFiles
 
 from config import settings
 from db import init_pool, close_pool
@@ -13,6 +15,8 @@ from routes.post_routes import router as post_router
 from routes.comment_routes import router as comment_router
 from routes.like_routes import router as like_router
 from routes.follow_routes import router as follow_router
+from routes.unsplash_routes import router as unsplash_router
+from routes.upload_routes import router as upload_router
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -57,6 +61,13 @@ app.include_router(post_router)
 app.include_router(comment_router)
 app.include_router(like_router)
 app.include_router(follow_router)
+app.include_router(unsplash_router)
+app.include_router(upload_router)
+
+# Serve locally uploaded images
+_uploads_dir = os.path.join(os.path.dirname(__file__), "uploads")
+os.makedirs(_uploads_dir, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=_uploads_dir), name="uploads")
 
 
 @app.get("/health", tags=["health"])

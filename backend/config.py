@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     refresh_token_expire_days: int = 7
     cors_origins: str = ["http://localhost:3000","https://blogging-site-s1yw.vercel.app/?jr_id=l_4362447153"]
     cookie_secure: bool = False
+    unsplash_access_key: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
